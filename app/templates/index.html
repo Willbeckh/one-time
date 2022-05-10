@@ -3,15 +3,20 @@
 <!-- landing page -->
 {% block content %}
 <div class="container">
+  {% if current_user.is_authenticated %}
   <h2>Hello, {{ current_user.username }}</h2>
-  {% for pitch in pitches %}
-  <div>
-    <p>{{pitch.author.username }}</p>
-    <hr />
-    <div class="pitches">
-      <h4>Posts</h4>
-      <p>Created: {{pitch.timestamp.strftime('%d/%m/%Y')}}</p>
-      <p>{{ pitch.text }}</p>
+  {% else %}
+  <h2>Welcome.</h2>
+  {% endif %}
+  <div class="pitches">
+    <h4>Posts</h4>
+    {% for pitch in pitches %}
+    <div>
+      <hr />
+      <div class="pitches">
+        <p>Created: {{pitch.timestamp.strftime('%d/%m/%Y')}}</p>
+        <p>{{ pitch.text }}</p>
+      </div>
     </div>
   </div>
   {% endfor %}
