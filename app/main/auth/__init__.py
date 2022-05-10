@@ -1,6 +1,5 @@
-import imp
 from flask import Blueprint
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__,  url_prefix='/authenticate')
 
-from . import views
+from . import login
