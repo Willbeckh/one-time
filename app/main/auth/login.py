@@ -23,7 +23,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         return redirect(next_page) if next_page else redirect(url_for('main.index'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('authenticate/login.html', title='Sign In', form=form)
 
 
 
@@ -47,7 +47,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash(f'Account for {user.username} successfully registerd!')
+        flash(f'Account for {user.username} successfully registered!')
         return redirect(url_for('auth.login'))
-    return render_template('register.html', title='Sign Up', form=form)
+    return render_template('authenticate/register.html', title='Sign Up', form=form)
         
