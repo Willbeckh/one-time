@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
 
 
     def __repr__(self):
-        return f'<User {self.email}> - <Bio: {self.about_me}>'
+        return f'<User {self.username}> - <Bio: {self.about_me}>'
 
     # @property
     # def password(self):
