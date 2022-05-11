@@ -47,3 +47,16 @@ def update_profile():
         form.username.data = current_user.username
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Update', form=form)
+
+
+# # user profile photo update route
+# @main.route('/user/<username>/update_profile/pic', methods=['POST'])
+# @login_required
+# def update_pic(username):
+#     user = User.query.filter_by(username=username).first()
+#     if 'photo' in request.files:
+#         filename = photos.save(request.files['photo'])
+#         path = f'photos/{filename}'
+#         user.display_pic_path = path
+#         db.session.commit()
+#     return redirect(url_for('main.user', username=current_user))
