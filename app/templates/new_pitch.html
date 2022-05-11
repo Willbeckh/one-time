@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+<!-- create post template -->
+{% block content %}
+<div class="container">
+  <h3>Add new Post</h3>
+  <form action="" method="post">
+    {{ form.csrf_token }}
+    <div class="title">
+      {{ form.title.label }}<br />
+      {{ form.title(size=32) }} <br />
+      {% for error in form.title.errors %}
+      <span style="color: red">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+    <div class="pitch__text">
+      {{ form.text.label }} <br />
+      {{ form.text(cols=50, rows=4) }} <br />
+      {% for error in form.text.errors %}
+      <span style="color: red">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+    <p>{{ form.submit() }}</p>
+  </form>
+</div>
+{% endblock %}
