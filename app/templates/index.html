@@ -8,19 +8,20 @@
   {% else %}
   <h2>Welcome.</h2>
   {% endif %}
+  <h4>Posts</h4>
+  {% for pitch in pitches %}
   <div class="pitches">
-    <h4>Posts</h4>
-    {% for pitch in pitches %}
+    <hr />
     <div>
-      <hr />
-      <div class="pitches">
-        <p>Created: {{pitch.timestamp.strftime('%d/%m/%Y')}}</p>
-        <p>{{pitch.title}}</p>
-        <p>{{ pitch.text }}</p>
-        <p>{{ pitch.author.username }}</p>
-      </div>
+      <p>Title: {{pitch.title}}</p>
+      <p>{{ pitch.text }}</p>
+      <p>{{ pitch.author.username }}</p>
+      <i class="text-muted"
+        >Created: {{pitch.timestamp.strftime('%d/%m/%Y %H:%M')}}</i
+      >
     </div>
   </div>
   {% endfor %}
 </div>
+
 {% endblock %}
