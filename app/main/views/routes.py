@@ -50,27 +50,16 @@ def update_profile():
     return render_template('edit_profile.html', title='Update', form=form)
 
 
-# # user profile photo update route
-# @main.route('/user/<username>/update_profile/pic', methods=['POST'])
-# @login_required
-# def update_pic(username):
-#     user = User.query.filter_by(username=username).first()
-#     if 'photo' in request.files:
-#         filename = photos.save(request.files['photo'])
-#         path = f'photos/{filename}'
-#         user.display_pic_path = path
-#         db.session.commit()
-#     return redirect(url_for('main.user', username=current_user))
-
 # crete form for creating a new post
 @main.route('/add_post', methods=['GET', 'POST'])
 @login_required
 def add_post():
     """Method to enable a user to create a new post"""
-    form =  AddPost()
+    form = AddPost()
     # validate form on submit
     if form.validate_on_submit():
-        pitch = Pitch(title=form.title.data, text=form.text.data, author=current_user)
+        pitch = Pitch(title=form.title.data,
+                      text=form.text.data, author=current_user)
         db.session.add(pitch)
         db.session.commit()
         flash(f"Post: '{pitch.title}' created successfully")
