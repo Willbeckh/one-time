@@ -10,7 +10,10 @@
   <em>{{ user.email }}</em>
   <p>Bio: <b>{{user.about_me}}</b></p>
   {% if user == current_user %}
-  <p><a href="{{ url_for('main.update_profile') }}">Edit profile</a></p>
+  <div class="edit__btns bg-info m-1">
+    <a href="{{ url_for('main.update_profile') }}">Edit profile</a>
+    <a href="{{ url_for('main.add_post') }}">Add Post</a>
+  </div>
   {% endif %}
 
   <h4>My posts</h4>
