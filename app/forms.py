@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 from wtforms import ValidationError
-from wtforms.validators import Email,EqualTo
+from wtforms.validators import Email, EqualTo
 from .models import User
+
 
 class LoginForm(FlaskForm):
     """
@@ -23,7 +24,8 @@ class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField('Repeat Password', validators=[
+                              DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
     def validate_user(self, username):
@@ -35,3 +37,11 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             return ValidationError("there is an account with that Email!")
+
+
+# user profile update form
+class ProfileUpdate(FlaskForm):
+    """ form for updating a user profile"""
+    username = StringField('Username', validators=[DataRequired()])
+    about_me = StringField('Bio', validators=[Length(min=20, max=200)])
+    submit = SubmitField('Update')
