@@ -4,7 +4,6 @@
 {% block content %}
 <div class="container">
   <!-- display pic -->
-  -->
   <!-- display pic -->
 
   <h1>{{ user.username }}</h1>
@@ -13,16 +12,18 @@
   {% if user == current_user %}
   <p><a href="{{ url_for('main.update_profile') }}">Edit profile</a></p>
   {% endif %}
-  <!-- TODO: create user last seen logic -->
 
   <h4>My posts</h4>
   {% for pitch in pitches %} {% if pitch.author == current_user %}
+  <hr />
   <div class="pitch">
-    <em>{{ pitch.user_id }}</em>
-    <h3>{{ pitch.title }}</h3>
+    <h4><b>{{ pitch.title }}</b></h4>
     <p>{{ pitch.text }}</p>
-    <p>{{ pitch.created_at }}</p>
+    <i class="text-muted"
+      >Date published:{{ pitch.timestamp.strftime('%Y/%d/%m') }}</i
+    >
   </div>
+  <hr />
   {% endif %} {% endfor %}
 </div>
 {% endblock %}
