@@ -13,12 +13,18 @@
   <div class="pitches">
     <hr />
     <div>
+      <img
+        src="{{ avatars.robohash(pitch.author.username, size='50')}}"
+        alt=""
+      />
       <p>Title: {{pitch.title}}</p>
       <p>{{ pitch.text }}</p>
       <p>{{ pitch.author.username }}</p>
-      <i class="text-muted"
-        >Created: {{pitch.timestamp.strftime('%d/%m/%Y %H:%M')}}</i
-      >
+      <i class="text-muted">
+        Created: {{pitch.timestamp.strftime('%d/%m/%Y %H:%M')}}
+      </i>
+      <em class="bg-success">{{ pitch.categories}}</em>
+      <!-- <em class="bg-success">comments:{{ pitch.pitch_comments.comment_text}}</em> -->
     </div>
   </div>
   {% endfor %}
