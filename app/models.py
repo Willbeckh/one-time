@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from . import db
 from . import login_manager
 
+
 @login_manager.user_loader
 def load_user(id):
     '''method that keeps the id of the current authenticated user'''
@@ -17,10 +18,12 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), )
     image_file = db.Column(db.String(20), nullable=True, default='default.jpg')
     password_hash = db.Column(db.String(128))
-    pitches = db.relationship('Pitch', backref='author', lazy='dynamic')
+    pitches = db.relationship(
+        'Pitch', backref='author', lazy='dynamic')  # one to many
+    comments = db.relationship(
+        'Comment', backref='author', lazy='dynamic')  # one to many
     about_me = db.Column(db.String(255))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-
 
     def __repr__(self):
         return f'<User {self.username}> - <Bio: {self.about_me}>'
@@ -46,6 +49,22 @@ class Pitch(db.Model):
     text = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_comments = db.relationship('Comment', backref="pitch", lazy='dynamic')
+    categories = db.Column(db.String(10))
 
     def __repr__(self):
         return f'<Post {self.text}>'
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    comment_text = db.Column(db.String(255))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+
+
+    def __repr__(self):
+        '''handler method for debugging purposes.'''
+        return f'<Comment: {self.comment_text}, Pitch_id: {self.pitch_id}'
