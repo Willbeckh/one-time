@@ -2,6 +2,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user
 from app.models import User
+from app.email import mail_message
 from . import auth
 from app.forms import LoginForm, RegisterForm
 from app import db
@@ -47,6 +48,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        mail_message = ('Welcome to One minute platform.', 'email/welcome_user', user.email, user.username)
         flash(f'Account for {user.username} successfully registered!')
         return redirect(url_for('auth.login'))
     return render_template('authenticate/register.html', title='Sign Up', form=form)
