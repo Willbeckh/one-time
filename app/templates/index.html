@@ -15,7 +15,9 @@
       <hr />
       <div class="pitches">
         <p>Created: {{pitch.timestamp.strftime('%d/%m/%Y')}}</p>
+        <p>{{pitch.title}}</p>
         <p>{{ pitch.text }}</p>
+        <p>{{ pitch.author.username }}</p>
       </div>
     </div>
   </div>
