@@ -51,4 +51,11 @@ class AddPost(FlaskForm):
     # title, text, submit
     title = StringField('Title', validators=[DataRequired()])
     text = TextAreaField('Text: ', validators=[Length(min=20, max=255)])
+    categories = StringField('Categories', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    
+    
+class CommentForm(FlaskForm):
+    """class that defines the comment form"""
+    comment_text = TextAreaField('Comment', validators=[Length(min=2, max=200)])
     submit = SubmitField('Submit')
