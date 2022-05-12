@@ -59,7 +59,7 @@ html {
 
 /* login form style */
 
-.login-container__form {
+.container__form {
   background-color: #f5f5f5;
   padding: 20%;
 }
@@ -71,6 +71,39 @@ html {
   padding: 16px;
 }
 /* login form style end */
+
+/* *user profile section */
+.user__profile {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 10px;
+  width: 90%;
+}
+.user__img {
+  background-color: #0000ff;
+  /* background: linear-gradient(145deg, #4d3664, #f5f5f5); */
+  border: 1px solid #cccccc3a;
+  border-radius: 50px;
+}
+.user__img img {
+  background-color: #dac;
+  border-radius: 60%;
+}
+.user__info {
+  padding-left: 10%;
+}
+
+.edit__btns a {
+  /* background-color: #3b3d3d; */
+  border-radius: 5px;
+  padding: 8px;
+  text-decoration: none;
+  color: rgb(44, 11, 11);
+}
+.edit__btns a:hover {
+  background-color: rgba(51, 50, 50, 0.089);
+}
+/* *user profile section end */
 
 /* alert messgaes */
 .alert__popup {
