@@ -1,3 +1,85 @@
-.main_wrapper {
-    padding: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+html {
+  scroll-behavior: smooth;
 }
+
+.main_wrapper {
+  padding: 20px;
+}
+
+/* landing page styles */
+.pitches {
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin: 10px;
+  width: 70%;
+}
+.pitch__header {
+  margin: 0.5em;
+}
+.pitch__img {
+  background-color: blue;
+  border: 1px solid #cccccc3a;
+  border-radius: 50px;
+}
+
+.pitch__body {
+  padding-left: 10%;
+  border-left: 1px solid #000;
+}
+
+.pitch__title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #3e2e77;
+  text-decoration: none;
+}
+
+.pitch__text {
+  font-size: 1.2em;
+  /* font-weight: 500; */
+  color: #0e0b18;
+  font-family: "Poppins", sans-serif;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  /* color: #0e0b18; */
+  font-family: "Poppins", sans-serif;
+}
+
+.tags {
+  font-size: 0.8em;
+  padding: 0.2em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* landing page styles end */
+
+/* login form style */
+
+.login-container__form {
+  background-color: #f5f5f5;
+  padding: 20%;
+}
+
+.auth__form {
+  background-color: #ddc7c7;
+  background: linear-gradient(45deg, #8bffff 95%, #8f71ff 5%, #3e2e77);
+  border-radius: 10px;
+  padding: 16px;
+}
+/* login form style end */
+
+/* alert messgaes */
+.alert__popup {
+  background-color: #dac;
+}
+
+.alert-text {
+  text-align: center;
+  /* padding: 2px; */
+  color: rgb(17, 14, 14);
+}
+/* alert messgaes end*/
