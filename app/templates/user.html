@@ -1,33 +1,54 @@
 {% extends 'base.html' %}
 
+<!-- title block -->
+{% block title %} {{ title }} {% endblock %}
+<!-- title block  end-->
+
 <!-- user profile page -->
 {% block content %}
-<div class="container">
-  <!-- display pic -->
-  <img src="{{ avatars.robohash(current_user.username)}}" alt="" />
-  <!-- display pic -->
-
-  <h1>{{ user.username }}</h1>
-  <em>{{ user.email }}</em>
-  <p>Bio: <b>{{user.about_me}}</b></p>
-  {% if user == current_user %}
-  <div class="edit__btns bg-info m-1">
-    <a href="{{ url_for('main.update_profile') }}">Edit profile</a>
-    <a href="{{ url_for('main.add_post') }}">Add Post</a>
+<div class="col col-4 w-75 p-5">
+  <div class="user__profile">
+    <div class="user__img">
+      <img src="{{ avatars.robohash(current_user.username)}}" alt="" />
+    </div>
+    <div class="user__info row mt-2">
+      <div class="col">
+        <h2>{{ current_user.username }}</h2>
+        <p>{{ current_user.email }}</p>
+      </div>
+      {% if user == current_user %}
+      <div class="edit__btns m-1 col">
+        <a href="{{ url_for('main.update_profile') }}">Edit profile</a>
+        <a href="{{ url_for('main.add_post') }}">Add Post</a>
+        <p class="p-2">Bio: <b>{{user.about_me}}</b></p>
+      </div>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
 
-  <h4>My posts</h4>
+  <h4 class="text-center">My posts</h4>
+
   {% for pitch in pitches %} {% if pitch.author == current_user %}
-  <hr />
-  <div class="pitch">
-    <h4><b>{{ pitch.title }}</b></h4>
-    <p>{{ pitch.text }}</p>
-    <i class="text-muted"
-      >Date published:{{ pitch.timestamp.strftime('%Y/%d/%m') }}</i
-    >
+  <div class="pitches">
+    <hr />
+    <div class="pitch__body">
+      <a
+        href="{{url_for('main.post', pitch_id=pitch.id)}}"
+        class="pitch__title"
+      >
+        {{pitch.title}}
+      </a>
+      <p>{{ pitch.text }}</p>
+      <i class="text-muted"
+        >Date published:{{ pitch.timestamp.strftime('%Y/%d/%m') }}</i
+      >
+      {% if pitch.categories %}
+      <p class="bg-success tags w-25">{{ pitch.categories }}</p>
+      {% else %}
+      <p class="bg-info tags w-25">general</p>
+      {% endif %}
+    </div>
   </div>
-  <hr />
   {% endif %} {% endfor %}
 </div>
 {% endblock %}
