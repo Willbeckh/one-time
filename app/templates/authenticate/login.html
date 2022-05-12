@@ -2,37 +2,46 @@
 
 <!-- form -->
 {% block content %}
-<div class="container">
-  <h3>Sign In</h3>
-  <form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
+<div class="col col-md-6 w-75 p-5 login-container">
+  <div class="container__form">
+    <div class="auth__form">
+      <h3 class="text-center">Sign In</h3>
+      <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
 
-    <div class="username">
-      <p class="form-label">{{ form.username.label }}</p>
-      <!--  -->
-      {{ form.username(size=32) }}<br />
-      <!-- form errors -->
-      {% for error in form.username.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
-    </div>
+        <div class="form-group">
+          {{ form.username.label(class='form-label') }} <br />
+          {{ form.username(class='form-control', size=32) }} <br />
+          {% for error in form.username.errors %}
+          <span style="color: red" class="alert-error">[{{ error }}]</span>
+          {% endfor %}
+        </div>
 
-    <div class="password__field">
-      <p class="form-label">{{ form.password.label }}</p>
-      <!--  -->
-      {{ form.password(size=32) }}<br />
-      <!-- form errors -->
-      {% for error in form.password.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
+        <div class="form-group">
+          {{ form.password.label(class='form-label') }} <br />
+          {{ form.password(size=32, class='form-control')}} <br />
+          {% for error in form.password.errors %}
+          <span style="color: red" class="alert-error">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <div class="form-check">
+          <label for="remember_me" class="form-check-label">Remember me</label>
+          <input type="checkbox" class="form-check-input" />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-sm btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#popup"
+        >
+          Sign In
+        </button>
+      </form>
     </div>
-    <p class="form-check">
-      {{ form.remember_me() }} {{form.remember_me.label }}
+    <p>
+      Don't have an account?
+      <a href="{{url_for('auth.register')}}">Get one here.</a>
     </p>
-    <p class="btn">{{ form.submit() }}</p>
-  </form>
-  <p>
-    Don't have an account? <a href="{{url_for('auth.register')}}">Get one here.</a>
-  </p>
+  </div>
 </div>
 {% endblock %}

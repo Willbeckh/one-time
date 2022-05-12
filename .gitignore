@@ -2,7 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/flask
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask
 
-start.sh
 ### Flask ###
 instance/*
 !instance/.gitignore
@@ -75,7 +74,10 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
-
+*.sh
+venv/
+start.sh
+cach.txt
 # Scrapy stuff:
 .scrapy
 

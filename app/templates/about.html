@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+<!--  -->
+{% block content %}
+<div class="col col-4 w-75 p-5">
+  <div class="about__content p-4 m-3">
+    <!-- <div class="about__img"> -->
+    <h2 class="text-center about__content-title">About One Time</h2>
+    <!-- </div> -->
+    <div class="about__text">
+      <p>One Time is a platform for pitching ideas to potential investors.</p>
+      <p>
+        <b>But not only Ideas!</b>
+        We saw the need for a platform to accomodate just about anything, be it
+        a quote, a pickup line, a pitch, a story, a link to your favourite
+        twitter thread. One time has it all.
+      </p>
+    </div>
+  </div>
+  <div class="contact">
+    <h2 class="text-center contact__title">Contact Us</h2>
+    <div class="contact__form">
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <i class="fa-regular fa-house"></i>
+          <input
+            type="email"
+            class="form-control w-50"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="form-floating">
+            <textarea
+              class="form-control w-50"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+            ></textarea>
+            <label for="floatingTextarea">Feedback.</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline-info">Send</button>
+      </form>
+    </div>
+    <p class="text-center">&copy; 2022 Billy</p>
+  </div>
+</div>
+{% endblock %}

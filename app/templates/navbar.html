@@ -1,12 +1,35 @@
-<div>
-  <a href="/">Home</a>
-  {% if current_user.is_anonymous %}
-  <a href="{{ url_for('auth.login')}}">Sign In</a>
-  <a href="{{url_for('auth.register') }}">Sign Up</a>
-  {% else %}
-  <a href="{{ url_for('.user', username=current_user.username ) }}">
-    Profile
-  </a>
-  <a href="{{ url_for('auth.logout') }}">Logout</a>
-  {% endif %}
+<div class="col p-5 nav__wrapper">
+  <div class="nav__container">
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/navbar.css')}}"
+    />
+    <div class="nav flex-column">
+      <a href="/" class="nav-link nav__item active" aria-current="page"
+        ><i class="fa-regular fa-house"></i>Home</a
+      >
+      <a href="{{ url_for('.about')}}" class="nav-link nav__item">About</a>
+      {% if current_user.is_anonymous %}
+      <a href="{{ url_for('auth.login')}}" class="nav-link nav__item">
+        Sign In
+      </a>
+      <a href="{{url_for('auth.register') }}" class="nav-link nav__item">
+        Sign Up
+      </a>
+      {% else %}
+      <a
+        href="{{ url_for('.user', username=current_user.username ) }}"
+        class="nav-link nav__item"
+      >
+        Profile
+      </a>
+      <a
+        href="{{ url_for('auth.logout') }}"
+        class="nav-link nav__item nav__item-logout"
+      >
+        Logout
+      </a>
+      {% endif %}
+    </div>
+  </div>
 </div>

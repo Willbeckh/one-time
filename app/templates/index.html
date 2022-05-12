@@ -1,26 +1,51 @@
 {% extends 'base.html' %}
 
+<!-- title block -->
+{% block title %} {{ title }} {% endblock %}
+<!-- title block  end-->
+
 <!-- landing page -->
 {% block content %}
-<div class="container">
+<div class="col col-4 w-75 p-5">
   {% if current_user.is_authenticated %}
   <h2>Hello, {{ current_user.username }}</h2>
   {% else %}
-  <h2>Welcome.</h2>
+  <h2>Welcome, To one minute Pitch.</h2>
   {% endif %}
+
+  <!--  -->
+  {% for pitch in pitches %}
   <div class="pitches">
-    <h4>Posts</h4>
-    {% for pitch in pitches %}
-    <div>
-      <hr />
-      <div class="pitches">
-        <p>Created: {{pitch.timestamp.strftime('%d/%m/%Y')}}</p>
-        <p>{{pitch.title}}</p>
-        <p>{{ pitch.text }}</p>
-        <p>{{ pitch.author.username }}</p>
-      </div>
+    <hr />
+
+    <div class="pitch__header">
+      <img
+        src="{{ avatars.robohash(pitch.author.username, size='50')}}"
+        alt=""
+        class="pitch__img"
+      />
+      <span class="fw-bold">{{ pitch.author.username }}</span>
+    </div>
+    <div class="pitch__body">
+      <a
+        href="{{url_for('main.post', pitch_id=pitch.id)}}"
+        class="pitch__title"
+      >
+        {{pitch.title}}</a
+      >
+      <i class="text-muted timestamp"
+        >{{pitch.timestamp.strftime('%d/%m/%Y %H:%M')}}
+      </i>
+
+      <p class="pitch__text">{{ pitch.text }}</p>
+      {% if pitch.categories %}
+      <em class="bg-success tags">{{ pitch.categories }}</em>
+      {% else %}
+      <em class="bg-info tags">general</em>
+      {% endif %}
     </div>
   </div>
   {% endfor %}
 </div>
+
 {% endblock %}

@@ -1,9 +1,10 @@
-from flask import render_template, redirect, flash, url_for, request
+from cmath import pi
+from flask import render_template, redirect, flash, url_for, request, abort
 from flask_login import login_required, current_user
 from .. import main  # blueprint
 from app import db
-from app.models import User, Pitch  # db models
-from app.forms import ProfileUpdate
+from app.models import User, Pitch, Comment, Vote  # db models
+from app.forms import ProfileUpdate, AddPost, CommentForm
 
 # TODO: create a before request to get user last seen time.
 
@@ -18,6 +19,12 @@ def index():
     pitches = Pitch.query.all()
     return render_template('index.html', title='Pitchy', pitches=pitches)
 
+@main.route('/about')
+def about():
+    """
+    Function for rendering the about page.
+    """
+    return render_template('about.html', title='About')
 
 # view availabe posts for specific user
 @main.route('/user/<username>')
@@ -47,3 +54,62 @@ def update_profile():
         form.username.data = current_user.username
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Update', form=form)
+
+
+# crete form for creating a new post
+@main.route('/add_post', methods=['GET', 'POST'])
+@login_required
+def add_post():
+    """Method to enable a user to create a new post"""
+    form = AddPost()
+    # validate form on submit
+    if form.validate_on_submit():
+        pitch = Pitch(title=form.title.data,
+                      text=form.text.data, author=current_user, categories=form.categories.data)
+        db.session.add(pitch)
+        db.session.commit()
+        flash(f"Post: '{pitch.title}' created successfully")
+        return redirect(url_for('main.index'))
+    return render_template('new_pitch.html', title="Add post", form=form)
+
+
+# view single pitch view
+@main.route('/post/<int:pitch_id>')
+# @login_required
+def post(pitch_id):
+    pitch = Pitch.query.get_or_404(pitch_id)
+    comments = Comment.query.all()
+    return render_template('post.html', title=pitch.title, pitch=pitch,  comments=comments)
+
+
+# create a comment route
+@main.route('/post/<int:pitch_id>/comment', methods=['GET', 'POST'])
+@login_required
+def comment(pitch_id):
+    """Method to enable a user to comment on a post"""
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(comment_text=form.comment_text.data,
+                          author=current_user, pitch_id=pitch_id)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('main.post', pitch_id=pitch_id))
+    return render_template('comment.html', title="Comment", form=form)
+
+# deleting  a post
+@main.route('/post/<int:pitch_id>/delete', methods=['POST'])
+@login_required
+def delete_post(pitch_id):
+  pitch = Pitch.query.get_or_404(pitch_id)
+  if pitch.author != current_user:
+    abort(403)
+  db.session.delete(pitch)
+  db.session.commit()
+  flash(f'Your post: `{pitch.title}` has been Deleted!')
+  return redirect(url_for('main.index'))
+
+# TODO: create a route for voting on a post
+# vote on a post
+# @main.route('/post/<int:pitch_id>/vote', methods=['GET', 'POST'])
+# def vote(pitch_id):
+    
