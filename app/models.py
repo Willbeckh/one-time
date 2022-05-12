@@ -24,15 +24,12 @@ class User(UserMixin, db.Model):
         'Comment', backref='author', lazy='dynamic')  # one to many
     about_me = db.Column(db.String(255))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    votes_id = db.Column(db.Integer, db.ForeignKey('votes.id'))
+    # votes = db.relationship('Vote', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return f'<User {self.username}> - <Bio: {self.about_me}>'
 
-    # @property
-    # def password(self):
-    #     raise AttributeError('Password not accessble!')
-
-    # @password.setter
     def set_password(self, password):
         """ Method to create a hashed password."""
         self.password_hash = generate_password_hash(password)
@@ -49,8 +46,10 @@ class Pitch(db.Model):
     text = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch_comments = db.relationship('Comment', backref="pitch", lazy='dynamic')
+    pitch_comments = db.relationship(
+        'Comment', backref="pitch", lazy='dynamic')
     categories = db.Column(db.String(10))
+    votes = db.relationship('Vote', backref='pitch', lazy='dynamic')
 
     def __repr__(self):
         return f'<Post {self.text}>'
@@ -64,7 +63,25 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
-
     def __repr__(self):
         '''handler method for debugging purposes.'''
         return f'<Comment: {self.comment_text}, Pitch_id: {self.pitch_id}'
+
+
+# votes
+class Vote(db.Model):
+    __tablename__ = 'votes'
+    id = db.Column(db.Integer, primary_key=True)
+    upvote = db.Column(db.Integer, default=0)
+    downvote = db.Column(db.Integer, default=0)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    user = db.relationship('User', backref='votes', lazy='dynamic')
+
+    def __repr__(self):
+        if self.upvote == 1:
+            vote = 'upvote'
+            return f'<Vote: {vote}>'
+            # return f'<Upvote: {self.upvote}>'
+        else:
+            vote = 'downvote'
+            return f'<Downvote: {vote}>'
