@@ -19,6 +19,12 @@ def index():
     pitches = Pitch.query.all()
     return render_template('index.html', title='Pitchy', pitches=pitches)
 
+@main.route('/about')
+def about():
+    """
+    Function for rendering the about page.
+    """
+    return render_template('about.html', title='About')
 
 # view availabe posts for specific user
 @main.route('/user/<username>')
