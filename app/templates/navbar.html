@@ -8,7 +8,7 @@
       <a href="/" class="nav-link nav__item active" aria-current="page"
         ><i class="fa-regular fa-house"></i>Home</a
       >
-      <a href="{{ url_for('.about')}}" class="nav-link nav__item">About</a>
+      <a href="{{ url_for('main.about')}}" class="nav-link nav__item">About</a>
       {% if current_user.is_anonymous %}
       <a href="{{ url_for('auth.login')}}" class="nav-link nav__item">
         Sign In
