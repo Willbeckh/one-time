@@ -2,49 +2,58 @@
 
 <!-- register form -->
 {% block content %}
-<div class="container">
-  <h1>Sign Up</h1>
-  <form action="" method="post">
-    {{ form.csrf_token }}
-    <div class="username">
-      <p class="form-label">{{ form.username.label }}</p>
-      {{ form.username(size=32) }}
-      <!-- errors -->
-      {% for error in form.username.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
-      <!-- errors -->
+<div class="col col-md-6 w-75 p-5">
+  <div class="container__form">
+    <div class="auth__form signup">
+      <h2 class="text-center">Sign Up</h2>
+      <form action="" method="post">
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.username.label(class='form-label') }} <br />
+          {{ form.username(class='form-control', size=32) }} <br />
+          {% for error in form.username.errors %}
+          <span class="text-danger">[{{error}}]</span>
+          {% endfor %}
+          <!-- errors -->
+        </div>
+        <div class="email">
+          {{ form.email.label(class='form-label')}} <br />
+          {{ form.email(class='form-control', size=32) }}
+          <!-- errors -->
+          {% for error in form.email.errors %}
+          <span class="text-danger">[{{error}}]</span>
+          {% endfor %}
+          <!-- errors -->
+        </div>
+        <div class="password">
+          {{ form.password.label(class='form-label') }} <br />
+          {{ form.password(class='form-control', size=32) }}
+          <!-- errors -->
+          {% for error in form.password.errors %}
+          <span class="text-danger">[{{error}}]</span>
+          {% endfor %}
+        </div>
+        <div class="password">
+          {{form.password2.label(class='form-label') }} <br />
+          {{form.password2(class='form-control', size=32)}}
+          <!-- errors -->
+          {% for error in form.password2.errors %}
+          <span class="text-danger">[{{error}}]</span>
+          {% endfor %}
+          <!-- errors -->
+        </div>
+        <div class="submit_btn mt-2">
+          <button
+            type="submit"
+            class="btn btn-sm btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#popup"
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="email">
-      <p class="form-label">{{ form.email.label}}</p>
-      {{ form.email(size=32) }}
-      <!-- errors -->
-      {% for error in form.email.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
-      <!-- errors -->
-    </div>
-    <div class="password">
-      <p class="form-label">{{ form.password.label }}</p>
-      {{ form.password(size=32) }}
-      <!-- errors -->
-      {% for error in form.password.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
-      <!-- errors -->
-    </div>
-    <div class="password">
-      <p class="form-label">{{form.password2.label}}</p>
-      {{form.password2(size=32)}}
-      <!-- errors -->
-      {% for error in form.password2.errors %}
-      <span class="text-danger">[{{error}}]</span>
-      {% endfor %}
-      <!-- errors -->
-    </div>
-    <div class="submit_btn">
-      <p class="btn">{{ form.submit() }}</p>
-    </div>
-  </form>
+  </div>
 </div>
 {% endblock %}
