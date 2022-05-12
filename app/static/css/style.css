@@ -162,7 +162,7 @@ i {
 }
 
 .contact {
-  background-color: rgba(37, 36, 36, 0.267);  
+  background-color: rgba(37, 36, 36, 0.267);
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -176,6 +176,7 @@ i {
 /* About page end */
 
 /* alert messgaes */
+
 .alert__popup {
   position: fixed;
   top: 0;
@@ -183,14 +184,23 @@ i {
   transform: translate(-50%, 0);
   width: 30%;
   height: 40px;
-  background-color: rgb(22, 184, 30);
-  border-radius: 4px;
-  display: none;
+  /* background-color: rgb(22, 184, 30); */
 }
 
 .alert-text {
   text-align: center;
-  /* padding: 2px; */
   color: rgb(17, 14, 14);
+}
+.success {
+  background-color: rgb(22, 184, 30);
+  border-radius: 4px;
+}
+.error {
+  background-color: rgb(255, 0, 0);
+  border-radius: 4px;
+}
+.message {
+  background-color: #1cbed3;
+  border-radius: 4px;
 }
 /* alert messgaes end*/
