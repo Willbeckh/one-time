@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
+<!-- title block -->
+{% block title %} {{ title }} {% endblock %}
+<!-- title block  end-->
 <!-- profile update -->
 {% block content %}
-<div class="container">
+<div class="col col-4 w-75 p-5">
   <h2>{{ current_user.username }}</h2>
   <p>Edit Profile</p>
   <form action="" method="post">
     {{ form.csrf_token }}
-    <p>
-      {{ form.username.label }}<br />
-      {{ form.username(size=32) }}<br />
+    <div class="form-group">
+      {{ form.username.label(class='form-label') }}<br />
+      {{ form.username(class='form-control', size=32) }}<br />
       {% for error in form.username.errors %}
       <span style="color: red">[{{ error }}]</span>
       {% endfor %}
-    </p>
-    <p>
-      {{ form.about_me.label }}<br />
-      {{ form.about_me(cols=50, rows=4) }}<br />
+    </div>
+    <div class="form-group">
+      {{ form.about_me.label(class='form-label') }}<br />
+      {{ form.about_me(class='form-control', cols=50, rows=4) }}<br />
       {% for error in form.about_me.errors %}
       <span style="color: red">[{{ error }}]</span>
       {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Update</button>
   </form>
 </div>
 {% endblock %}
