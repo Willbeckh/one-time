@@ -54,6 +54,7 @@ html {
   padding: 0.2em;
   border-radius: 5px;
   cursor: pointer;
+  width: 10%;
 }
 /* landing page styles end */
 
@@ -104,6 +105,39 @@ html {
   background-color: rgba(51, 50, 50, 0.089);
 }
 /* *user profile section end */
+
+/* *Single post view */
+.pitch__card {
+  background-color: #ceeeec;
+  padding: 20px;
+  margin: 10px;
+  width: 90%;
+  border-radius: 10px;
+}
+.pitch__author {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #3e2e77;
+  text-decoration: none;
+}
+
+.comments {
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.comment__body {
+  padding-left: 10%;
+  border-left: 1px solid #000;
+}
+.comment__author .author {
+  font-size: 0.9em;
+  text-decoration: none;
+}
+/* *Single post view end*/
 
 /* alert messgaes */
 .alert__popup {

@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
-
+<!-- title block -->
+{% block title %} {{ title }} {% endblock %}
+<!-- title block  end-->
 <!-- Single pitch view -->
 {% block content %}
-<div class="container">
-  <div class="row">
+<div class="col col-4 w-75 p-5">
+  <div class="pitch__card">
     <div class="col-md-12">
-      <h1>{{ pitch.title }}</h1>
-      <p>{{ pitch.text }}</p>
-      <p>{{ pitch.author.username}}</p>
-      <p class="bg-danger">{{ pitch.categories}}</p>
+      <h2>{{ pitch.title }}</h2>
+      <p class="bg-danger tags">{{ pitch.categories}}</p>
+      <p class="pitch__author">By: {{ pitch.author.username}}</p>
+      <p class="pitch__text">{{ pitch.text }}</p>
+      <a href="{{ url_for('main.comment', pitch_id=pitch.id)}}">Comment...</a>
     </div>
   </div>
-  <div class="row">
+  <div class="comments">
     <div class="col-md-12">
-      <h2>Comments</h2>
-      <a href="{{ url_for('main.comment', pitch_id=pitch.id)}}">reply..</a>
-      <!-- comments -->
+      <h4 class="text-center">Comments</h4>
       {% for comment in comments %} {% if comment.pitch_id == pitch.id %}
-      <p>{{comment.comment_text}}</p>
-      <sub>{{comment.author.username}}</sub>
+      <div class="comment__body">
+        <p>{{comment.comment_text}}</p>
+        <p class="text-muted author">~{{comment.author.username}}</p>
+      </div>
       {% endif %} {% endfor %}
     </div>
-    <!-- comments end -->
   </div>
 </div>
 {% endblock %}
