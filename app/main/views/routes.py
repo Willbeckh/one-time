@@ -1,5 +1,5 @@
 from cmath import pi
-from flask import render_template, redirect, flash, url_for, request
+from flask import render_template, redirect, flash, url_for, request, abort
 from flask_login import login_required, current_user
 from .. import main  # blueprint
 from app import db
@@ -90,6 +90,17 @@ def comment(pitch_id):
         return redirect(url_for('main.post', pitch_id=pitch_id))
     return render_template('comment.html', title="Comment", form=form)
 
+# deleting  a post
+@main.route('/post/<int:pitch_id>/delete', methods=['POST'])
+@login_required
+def delete_post(pitch_id):
+  pitch = Pitch.query.get_or_404(pitch_id)
+  if pitch.author != current_user:
+    abort(403)
+  db.session.delete(pitch)
+  db.session.commit()
+  flash(f'Your post: `{pitch.title}` has been Deleted!')
+  return redirect(url_for('main.index'))
 
 # TODO: create a route for voting on a post
 # vote on a post
