@@ -8,10 +8,6 @@ html {
   padding: 20px;
 }
 
-i {
-  color: #000;
-}
-
 /* landing page styles */
 .pitches {
   background-color: #f5f5f5;
@@ -42,14 +38,12 @@ i {
 
 .pitch__text {
   font-size: 1.2em;
-  /* font-weight: 500; */
   color: #0e0b18;
   font-family: "Poppins", sans-serif;
 }
 
 .timestamp {
   font-size: 0.8em;
-  /* color: #0e0b18; */
   font-family: "Poppins", sans-serif;
 }
 
@@ -63,7 +57,6 @@ i {
 /* landing page styles end */
 
 /* login form style */
-
 .container__form {
   background-color: #f5f5f5;
   padding: 20%;
@@ -86,7 +79,6 @@ i {
 }
 .user__img {
   background-color: #0000ff;
-  /* background: linear-gradient(145deg, #4d3664, #f5f5f5); */
   border: 1px solid #cccccc3a;
   border-radius: 50px;
 }
@@ -99,7 +91,6 @@ i {
 }
 
 .edit__btns a {
-  /* background-color: #3b3d3d; */
   border-radius: 5px;
   padding: 8px;
   text-decoration: none;
@@ -176,15 +167,12 @@ i {
 /* About page end */
 
 /* alert messgaes */
-
 .alert__popup {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
   width: 30%;
-
-  /* background-color: rgb(22, 184, 30); */
 }
 
 .alert-text {
