@@ -10,14 +10,16 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # email configs
-    MAIL_SERVER = 'smtp.googlemail.com'
+    DEBUG = True
+    MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     # avatar configs
     AVATARS_GRAVATAR_DEFAULT = 'identicon'
-    AVATARS_SIZE_TUPLE = (30, 60, 150)
+    AVATARS_SIZE_TUPLE = (15, 30, 60, 150)
 
 class ProdConfig(Config):
     pass

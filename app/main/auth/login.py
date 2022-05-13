@@ -49,7 +49,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        mail_message = ('Welcome to One minute platform.', 'email/welcome_user', user.email, user.username)
+        mail_message('Welcome to One time platform.', 'email/welcome_user', user.email, user=user)
         flash(f'Account for {user.username} successfully registered!', 'success')
         return redirect(url_for('auth.login'))
     return render_template('authenticate/register.html', title='Sign Up', form=form)
