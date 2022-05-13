@@ -183,7 +183,7 @@ i {
   left: 50%;
   transform: translate(-50%, 0);
   width: 30%;
-  height: 40px;
+
   /* background-color: rgb(22, 184, 30); */
 }
 
@@ -191,16 +191,20 @@ i {
   text-align: center;
   color: rgb(17, 14, 14);
 }
+.success,
+.error,
+.message {
+  border-radius: 4px;
+  height: 40px;
+}
 .success {
   background-color: rgb(22, 184, 30);
-  border-radius: 4px;
 }
 .error {
   background-color: rgb(255, 0, 0);
-  border-radius: 4px;
 }
 .message {
   background-color: #1cbed3;
-  border-radius: 4px;
+  color: rgb(207, 61, 17);
 }
 /* alert messgaes end*/
