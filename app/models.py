@@ -75,7 +75,7 @@ class Vote(db.Model):
     upvote = db.Column(db.Integer, default=0)
     downvote = db.Column(db.Integer, default=0)
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
-    user = db.relationship('User', backref='votes', lazy='dynamic')
+    user_id = db.relationship('User', backref='votes', lazy='dynamic')
 
     def __repr__(self):
         if self.upvote == 1:
